@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.autism.mapper.AdministratorMapper">
+	<resultMap type="com.autism.model.Administrator" id="BaseResultMap">
+		<id column="userid" property="userid" jdbcType="VARCHAR"/>
+		<result column="name" property="name" jdbcType="VARCHAR"/>
+		<result column="password" property="password" jdbcType="VARCHAR"/>
+		<result column="super_flag" property="superFlag" jdbcType="VARCHAR"/>
+		<result column="valid_flag" property="validFlag" jdbcType="VARCHAR"/>
+		<result column="create_date" property="createDate" jdbcType="VARCHAR"/>
+		<result column="update_date" property="updateDate" jdbcType="VARCHAR"/>
+	</resultMap>
+</mapper>

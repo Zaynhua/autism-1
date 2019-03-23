@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.autism.mapper.UserDetailMapper">
+	<resultMap type="com.autism.model.UserDetail" id="BaseResultMap">
+		<id column="uuid" property="uuid" jdbcType="VARCHAR"/>
+		<result column="register_id" property="registerId" jdbcType="VARCHAR"/>
+		<result column="register_time" property="registerTime" jdbcType="VARCHAR"/>
+		<result column="last_login_ip" property="lastLoginIp" jdbcType="VARCHAR"/>
+		<result column="last_login_time" property="lastLoginTime" jdbcType="VARCHAR"/>
+		<result column="login_time_num" property="loginTimeNum" jdbcType="INTEGER"/>
+		<result column="login_day_num" property="loginDayNum" jdbcType="INTEGER"/>
+		<result column="last_comment_time" property="lastCommentTime" jdbcType="VARCHAR"/>
+		<result column="comment_num" property="commentNum" jdbcType="VARCHAR"/>
+		<result column="excellent_flag" property="excellentFlag" jdbcType="VARCHAR"/>
+		<result column="sensitive_flag" property="sensitiveFlag" jdbcType="VARCHAR"/>
+	</resultMap>
+</mapper>
