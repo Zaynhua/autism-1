@@ -5,26 +5,10 @@
       
 <configuration>  
     <!-- 全局别名设置，在映射文件中只需写别名，而不必写出整个类路径  -->  
-    <typeAliases>    
-         <typeAlias type="com.autism.model.Person" alias="Person"/>
-         <typeAlias type="com.autism.model.Administrator" alias="Administrator"/>
-         <typeAlias type="com.autism.model.ClassDet" alias="ClassDet"/>
-         <typeAlias type="com.autism.model.Comment" alias="Comment"/>
-         <typeAlias type="com.autism.model.Follow" alias="Follow"/>
-         <typeAlias type="com.autism.model.ProjectInfo" alias="ProjectInfo"/>
-         <typeAlias type="com.autism.model.Share" alias="Share"/>
+    <typeAliases>
          <typeAlias type="com.autism.model.User" alias="User"/>
-         <typeAlias type="com.autism.model.UserDetail" alias="UserDetail"/>
     </typeAliases>     
-     <mappers>  
-        <mapper url="classpath:mapping/PersonMapper.xml" />
-        <mapper url="classpath:mapping/AdministratorMapper.xml"/>
-        <mapper url="classpath:mapping/ClassDetMapper.xml"/>
-        <mapper url="classpath:mapping/CommentMapper.xml"/>
-        <mapper url="classpath:mapping/FollowMapper.xml"/>
-        <mapper url="classpath:mapping/ProjectInfoMapper.xml"/>
-        <mapper url="classpath:mapping/ShareMapper.xml"/>
+     <mappers>
         <mapper url="classpath:mapping/UserMapper.xml"/>
-        <mapper url="classpath:mapping/UserDetailMapper.xml"/>
     </mappers>
 </configuration>

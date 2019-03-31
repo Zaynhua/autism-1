@@ -2,17 +2,48 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.autism.mapper.UserMapper">
 	<resultMap type="com.autism.model.User" id="BaseResultMap">
-		<id column="id" property="id" jdbcType="VARCHAR"/>
+		<id column="uuid" property="uuid" jdbcType="VARCHAR"/>
 		<result column="name" property="name" jdbcType="VARCHAR"/>
-		<result column="nick_name" property="nickName" jdbcType="VARCHAR"/>
-		<result column="username" property="username" jdbcType="VARCHAR"/>
 		<result column="password" property="password" jdbcType="VARCHAR"/>
+		<result column="type" property="type" jdbcType="VARCHAR"/>
+		<result column="phone" property="phone" jdbcType="VARCHAR"/>
+		<result column="email" property="email" jdbcType="VARCHAR"/>
 		<result column="sex" property="sex" jdbcType="VARCHAR"/>
-		<result column="telephone" property="telephone" jdbcType="VARCHAR"/>
-		<result column="utype" property="utype" jdbcType="VARCHAR"/>
-		<result column="createDate" property="createDate" jdbcType="VARCHAR"/>
-		<result column="updateDate" property="updateDate" jdbcType="VARCHAR"/>
-		<result column="loginDate" property="loginDate" jdbcType="VARCHAR"/>
-		<result column="logoutDate" property="logoutDate" jdbcType="VARCHAR"/>
+		<result column="province" property="province" jdbcType="VARCHAR"/>
+		<result column="create_time" property="createTime" jdbcType="BIGINT"/>
+		<result column="update_time" property="updateTime" jdbcType="BIGINT"/>
+		<result column="flag" property="flag" jdbcType="VARCHAR"/>
+		<result column="open_id" property="openId" jdbcType="VARCHAR"/>
 	</resultMap>
+	
+	<select id="login" resultMap = "BaseResultMap">
+		select * from user where flag='1' 
+		<if test="type!=null and type != '' ">
+		and type = #{type} 
+		</if>
+		<if test="phone != null and phone != '' ">
+		and phone=#{phone} 
+		</if>
+		<if test="password != null and password != '' ">
+		and password=#{password} 
+		</if>
+	</select>
+	
+	<select id="getUserInfos" resultMap="BaseResultMap">
+		select * from user where flag='1' 
+		<if test="uuid!=null and uuid!='' ">
+		and uuid = #{uuid} 
+		</if>
+		<if test="open_id!=null and open_id!='' ">
+		and open_id = #{open_id} 
+		</if>
+	</select>
+	
+	<select id="getUserByPhone" resultMap="BaseResultMap">
+		select * from user where flag = '1' 
+		<if test="phone!=null and phone!='' ">
+			and phone = #{phone} 
+		</if>
+	</select> 
+	
 </mapper>

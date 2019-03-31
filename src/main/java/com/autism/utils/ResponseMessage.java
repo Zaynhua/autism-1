@@ -20,4 +20,6 @@ public abstract interface ResponseMessage {
   public static final String UPLOAD_FAILED_MSG = "上传失败";
   public static final String SYNC_SUCCESS_MSG = "同步成功";
   public static final String SYNC_ERROR_MSG = "同步失败";
+  public static final String LOGIN_SUCCESS_MSG = "登录成功";
+  public static final String LOGIN_FAILED_MSG = "登录失败";
 }
