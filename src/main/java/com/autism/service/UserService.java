@@ -1,5 +1,7 @@
 package com.autism.service;
 
+import java.sql.Time;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -10,49 +12,11 @@ import org.springframework.transaction.annotation.Transactional;
 import com.alibaba.druid.util.StringUtils;
 import com.autism.mapper.UserMapper;
 import com.autism.model.User;
+import com.autism.utils.CommonUtil;
 import com.autism.utils.RandomUtils;
 
 @Service
 public class UserService{
-
-//	/**
-//	 * 用户登录
-//	 * @throws Exception 
-//	 */
-//	public User login(String phone,String password,String type) throws Exception;
-//	
-//	/**
-//	 * 获取用户信息
-//	 * @param uuid
-//	 * @param openId
-//	 * @return
-//	 * @throws Exception
-//	 */
-//	public ArrayList<User> getUserInfo(ArrayList<String> uuid,ArrayList<String> openId) throws Exception;
-//	
-//	/**
-//	 * 添加用户
-//	 * @param user
-//	 * @return
-//	 * @throws Exception
-//	 */
-//	public String addUser(User user) throws Exception;
-//	
-//	/**
-//	 * 删除用户
-//	 * @param uuidList
-//	 * @return
-//	 * @throws Exception
-//	 */
-//	public String deleteUser(String uuid) throws Exception;
-//	
-//	/**
-//	 * 更新用户
-//	 * @param user
-//	 * @return
-//	 * @throws Exception
-//	 */
-//	public String updateUser(User user) throws Exception;
 	
 	@Autowired
 	private UserMapper userMapper;
@@ -116,7 +80,9 @@ public class UserService{
 		}
 		
 		String uuid = RandomUtils.UUIDString();
-		long nowTime = new Date().getTime();
+//		int nowTime = (int)new Date().getTime();
+		String time = CommonUtil.getNowTimeStamp();
+		int nowTime = Integer.valueOf(time).intValue();
 		user.setUuid(uuid);
 		user.setCreateTime(nowTime);
 		user.setUpdateTime(nowTime);		
@@ -132,7 +98,9 @@ public class UserService{
 		if (user==null||"0".equals(user.getFlag())) {
 			throw new Exception("该用户不存在");
 		}
-		long nowTime = new Date().getTime();
+//		int nowTime = (int)new Date().getTime();
+		String time = CommonUtil.getNowTimeStamp();
+		int nowTime = Integer.valueOf(time).intValue();
 		user.setUpdateTime(nowTime);
 		user.setFlag("0");
 		this.userMapper.updateByPrimaryKeySelective(user);
@@ -150,7 +118,9 @@ public class UserService{
 		if (orgUser.getUpdateTime()==user.getUpdateTime()) {
 			throw new Exception("此条消息正在被他人修改，请重新查询后再进行修改");
 		}
-		long nowTime = new Date().getTime();
+//		int nowTime = (int)new Date().getTime();
+		String time = CommonUtil.getNowTimeStamp();
+		int nowTime = Integer.valueOf(time).intValue();
 		user.setUpdateTime(nowTime);
 		user.setFlag("1");
 		this.userMapper.updateByPrimaryKeySelective(user);

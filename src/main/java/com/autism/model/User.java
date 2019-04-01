@@ -33,10 +33,10 @@ public class User {
   private String province;
   
   @Column(name="create_time")
-  private long createTime;
+  private int createTime;
   
   @Column(name="update_time")
-  private long updateTime;
+  private int updateTime;
   
   @Column(name="flag")
   private String flag;
@@ -108,19 +108,19 @@ public class User {
 	this.province = province;
   }
 
-public long getCreateTime() {
+public int getCreateTime() {
 	  return createTime;
   }
 
-  public void setCreateTime(long createTime) {
+  public void setCreateTime(int createTime) {
 	  this.createTime = createTime;
   }
 
-  public long getUpdateTime() {
+  public int getUpdateTime() {
 	  return updateTime;
   }
 
-  public void setUpdateTime(long updateTime) {
+  public void setUpdateTime(int updateTime) {
 	  this.updateTime = updateTime;
   }
 

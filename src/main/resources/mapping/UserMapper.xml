@@ -10,8 +10,8 @@
 		<result column="email" property="email" jdbcType="VARCHAR"/>
 		<result column="sex" property="sex" jdbcType="VARCHAR"/>
 		<result column="province" property="province" jdbcType="VARCHAR"/>
-		<result column="create_time" property="createTime" jdbcType="BIGINT"/>
-		<result column="update_time" property="updateTime" jdbcType="BIGINT"/>
+		<result column="create_time" property="createTime" jdbcType="INTEGER"/>
+		<result column="update_time" property="updateTime" jdbcType="INTEGER"/>
 		<result column="flag" property="flag" jdbcType="VARCHAR"/>
 		<result column="open_id" property="openId" jdbcType="VARCHAR"/>
 	</resultMap>
