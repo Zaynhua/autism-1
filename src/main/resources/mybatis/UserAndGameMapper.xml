@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zl.autism.mapper.UserAndGameMapper">
+    <resultMap type="com.zl.autism.model.UserAndGame" id="BaseResultMap">
+        <id column="uuid" property="uuid" jdbcType="VARCHAR"/>
+        <result column="game_id" property="gameId" jdbcType="VARCHAR"/>
+        <result column="user_id" property="userId" jdbcType="VARCHAR"/>
+        <result column="game_log" property="gameLog" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime" jdbcType="INTEGER"/>
+        <result column="update_time" property="updateTime" jdbcType="INTEGER"/>
+        <result column="flag" property="flag" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <select id="getGameRelation" resultMap="BaseResultMap">
+        select * from autism_user_gameinfo where flag='1'
+
+        <if test="uuidList != null and uuidList.size()&gt;0">
+            and uuid in
+            <foreach close=")" collection="uuidList" index="index" item="listItem" open="(" separator=",">
+                #{listItem}
+            </foreach>
+        </if>
+
+    </select>
+
+</mapper>

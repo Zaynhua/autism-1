@@ -1,5 +1,7 @@
 package com.zl.autism.utils;
 
+import com.github.pagehelper.util.StringUtil;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -7,7 +9,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 
-import com.github.pagehelper.StringUtil;
+//import com.github.pagehelper.StringUtil;
 
 public class CommonUtil {
 

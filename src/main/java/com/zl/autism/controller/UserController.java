@@ -1,8 +1,8 @@
 package com.zl.autism.controller;
 
 import java.util.ArrayList;
-import java.util.List;
 
+import com.github.pagehelper.PageHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +15,6 @@ import com.zl.autism.model.response.UserPageResult;
 import com.zl.autism.model.response.UserResult;
 import com.zl.autism.service.UserService;
 import com.zl.autism.utils.ResponseMessage;
-import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 
 import io.swagger.annotations.Api;
@@ -42,15 +41,14 @@ public class UserController {
             @ApiResponse(code=ResponseMessage.ERROR_CODE,message=ResponseMessage.LOGIN_FAILED_MSG,response=UserResult.class)})
     public UserResult login(
             @ApiParam(name="phone",value="用户电话号码",required=true)@RequestParam String phone,
-            @ApiParam(name="password",value="密码",required=true)@RequestParam String password,
-            @ApiParam(name="type",value="登录类型",required=true)@RequestParam String type
+            @ApiParam(name="password",value="密码",required=true)@RequestParam String password
     ) {
         UserResult rs = new UserResult();
 
         try {
             //条件都符合开始操作
 
-            User user = this.userService.login(phone, password, type);
+            User user = this.userService.login(phone, password);
 
             rs.setData(user);
             rs.setStatusCode(ResponseMessage.SUCCESS_CODE);
@@ -96,13 +94,14 @@ public class UserController {
     public UserPageResult getUserInfo(
             @ApiParam(name="uuid",value="用户唯一表示uuid",required=false)@RequestParam(required=false)ArrayList<String> uuid,
             @ApiParam(name="open_id",value="授权用户唯一标识",required=false)@RequestParam(required=false)ArrayList<String> openId,
+            @ApiParam(name = "type",value = "类型",required = false)@RequestParam(required = false)String type,
             @ApiParam(name="pageNum",value="当前页码")@RequestParam(defaultValue="1") int pageNum,
             @ApiParam(name="pageSize",value="每页显示的条数")@RequestParam(defaultValue="10") int pageSize) {
 
         UserPageResult rs = new UserPageResult();
         try {
             PageHelper.startPage(pageNum,pageSize);
-            ArrayList<User> users = this.userService.getUserInfo(uuid, openId);
+            ArrayList<User> users = this.userService.getUserInfo(uuid, openId,type);
             PageInfo<User> page = new PageInfo<User>(users);
             rs.setData(page);
             rs.setStatusCode(ResponseMessage.SUCCESS_CODE);
@@ -146,10 +145,11 @@ public class UserController {
             @ApiResponse(code=ResponseMessage.ERROR_CODE,message=ResponseMessage.UPDATE_ERROR_MSG,response=IDResult.class)
     })
     public IDResult updateUser(
-            @ApiParam(name="user",value="需要更新的用户信息",required=true)@RequestBody User user) {
+            @ApiParam(name="user",value="需要更新的用户信息",required=true)@RequestBody User user,
+            @ApiParam(name = "newPsw",value = "newPsw",required = false)@RequestParam(required = false) String newPsw) {
         IDResult rs = new IDResult();
         try {
-            String uuid = this.userService.updateUser(user);
+            String uuid = this.userService.updateUser(user,newPsw);
             rs.setData(uuid);
             rs.setStatusCode(ResponseMessage.SUCCESS_CODE);
         } catch (Exception e) {

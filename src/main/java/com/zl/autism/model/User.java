@@ -3,9 +3,10 @@ package com.zl.autism.model;
 import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.util.ArrayList;
 
 
-@Table(name="user")
+@Table(name="autism_user")
 public class User {
     @Id
     @Column(name="uuid")
@@ -29,8 +30,23 @@ public class User {
     @Column(name="sex")
     private String sex;
 
-    @Column(name="province")
-    private String province;
+    @Column(name="real_name")
+    private String realName;
+
+    @Column(name="nation")
+    private String nation;
+
+    @Column(name="address")
+    private String address;
+
+    @Column(name="qualification_number")
+    private String qualificationNumber;
+
+    @Column(name="work_time")
+    private long workTime;
+
+    @Column(name="dept_id")
+    private String deptId;
 
     @Column(name="create_time")
     private int createTime;
@@ -44,6 +60,9 @@ public class User {
     @Column(name="open_id")
     private String openId;
 
+    private ArrayList<User> relatedUser;
+
+
     public String getUuid() {
         return uuid;
     }
@@ -52,8 +71,56 @@ public class User {
         this.uuid = uuid;
     }
 
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public int getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(int createTime) {
+        this.createTime = createTime;
+    }
+
+    public String getDeptId() {
+        return deptId;
+    }
+
+    public void setDeptId(String deptId) {
+        this.deptId = deptId;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getFlag() {
+        return flag;
+    }
+
+    public void setFlag(String flag) {
+        this.flag = flag;
+    }
+
     public String getName() {
         return name;
+    }
+
+    public String getNation() {
+        return nation;
+    }
+
+    public void setNation(String nation) {
+        this.nation = nation;
     }
 
     public void setName(String name) {
@@ -84,14 +151,6 @@ public class User {
         this.phone = phone;
     }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
     public String getSex() {
         return sex;
     }
@@ -100,20 +159,28 @@ public class User {
         this.sex = sex;
     }
 
-    public String getProvince() {
-        return province;
+    public String getRealName() {
+        return realName;
     }
 
-    public void setProvince(String province) {
-        this.province = province;
+    public void setRealName(String realName) {
+        this.realName = realName;
     }
 
-    public int getCreateTime() {
-        return createTime;
+    public String getQualificationNumber() {
+        return qualificationNumber;
     }
 
-    public void setCreateTime(int createTime) {
-        this.createTime = createTime;
+    public void setQualificationNumber(String qualificationNumber) {
+        this.qualificationNumber = qualificationNumber;
+    }
+
+    public long getWorkTime() {
+        return workTime;
+    }
+
+    public void setWorkTime(long workTime) {
+        this.workTime = workTime;
     }
 
     public int getUpdateTime() {
@@ -124,14 +191,6 @@ public class User {
         this.updateTime = updateTime;
     }
 
-    public String getFlag() {
-        return flag;
-    }
-
-    public void setFlag(String flag) {
-        this.flag = flag;
-    }
-
     public String getOpenId() {
         return openId;
     }
@@ -140,5 +199,11 @@ public class User {
         this.openId = openId;
     }
 
+    public ArrayList<User> getrelatedUser() {
+        return relatedUser;
+    }
 
+    public void setrelatedUser(ArrayList<User> relatedUser) {
+        this.relatedUser = relatedUser;
+    }
 }

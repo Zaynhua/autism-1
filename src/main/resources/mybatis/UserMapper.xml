@@ -9,7 +9,14 @@
         <result column="phone" property="phone" jdbcType="VARCHAR"/>
         <result column="email" property="email" jdbcType="VARCHAR"/>
         <result column="sex" property="sex" jdbcType="VARCHAR"/>
-        <result column="province" property="province" jdbcType="VARCHAR"/>
+        <result column="real_name" property="realName" jdbcType="VARCHAR"/>
+        <result column="nation" property="nation" jdbcType="VARCHAR"/>
+
+        <result column="address" property="address" jdbcType="VARCHAR"/>
+        <result column="qualification_number" property="qualificationNumber" jdbcType="VARCHAR"/>
+
+        <result column="work_time" property="workTime" jdbcType="BIGINT"/>
+        <result column="dept_id" property="deptId" jdbcType="VARCHAR"/>
         <result column="create_time" property="createTime" jdbcType="INTEGER"/>
         <result column="update_time" property="updateTime" jdbcType="INTEGER"/>
         <result column="flag" property="flag" jdbcType="VARCHAR"/>
@@ -17,10 +24,7 @@
     </resultMap>
 
     <select id="login" resultMap = "BaseResultMap">
-        select * from user where flag='1'
-        <if test="type!=null and type != '' ">
-            and type = #{type}
-        </if>
+        select * from autism_user where flag='1'
         <if test="phone != null and phone != '' ">
             and phone=#{phone}
         </if>
@@ -30,7 +34,7 @@
     </select>
 
     <select id="getUserInfos" resultMap="BaseResultMap">
-        select * from user where flag='1'
+        select * from autism_user where flag='1'
 <!--        <if test="uuid!=null and uuid!='' ">-->
 <!--            and uuid = #{uuid}-->
 <!--        </if>-->
@@ -39,22 +43,25 @@
 <!--        </if>-->
         <if test="uuid != null and uuid.size()&gt;0">
             and uuid in
-            <foreach close=")" collection="uuid" index="index" item="itme" open="(" separator=",">
-                #{item}
+            <foreach close=")" collection="uuid" index="index" item="listItem" open="(" separator=",">
+                #{listItem}
             </foreach>
         </if>
 
         <if test="open_id != null and open_id.size()&gt;0">
             and open_id in
-            <foreach close=")" collection="open_id" index="index" item="itme" open="(" separator=",">
-                #{item}
+            <foreach close=")" collection="open_id" index="index" item="openId" open="(" separator=",">
+                #{openId}
             </foreach>
         </if>
 
+        <if test="type != null and type != ''">
+            and type = #{type}
+        </if>
     </select>
 
     <select id="getUserByPhone" resultMap="BaseResultMap">
-        select * from user where flag = '1'
+        select * from autism_user where flag = '1'
         <if test="phone!=null and phone!='' ">
             and phone = #{phone}
         </if>
