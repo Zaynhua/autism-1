@@ -1,7 +1,9 @@
 package com.zl.autism.service;
 
 import com.zl.autism.mapper.AutismGameMapper;
+import com.zl.autism.mapper.UserMapper;
 import com.zl.autism.model.AutismGame;
+import com.zl.autism.model.User;
 import com.zl.autism.utils.CommonUtil;
 import com.zl.autism.utils.RandomUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +17,9 @@ public class AutismGameService {
 
     @Autowired
     private AutismGameMapper autismGameMapper;
+
+    @Autowired
+    private UserMapper userMapper;
 
     //增加游戏
     public String addGame(AutismGame game) throws Exception{
@@ -95,6 +100,10 @@ public class AutismGameService {
     //查询game
     public ArrayList<AutismGame> getAutismGameList(ArrayList<String> uuidList){
         ArrayList<AutismGame> list = this.autismGameMapper.getAutismGameList(uuidList);
+        for (AutismGame game:list) {
+            User createUser = this.userMapper.selectByPrimaryKey(game.getDevId());
+            game.setCreateUser(createUser);
+        }
         return list;
     }
 }

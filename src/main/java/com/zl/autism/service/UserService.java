@@ -147,16 +147,13 @@ public class UserService{
 		return uuid;
 	}
 
-	public String updateUser(User user,String newPsw) throws Exception {
+	public String updateUser(User user,String type,String newPsw) throws Exception {
 		if (StringUtils.isEmpty(user.getUuid())) {
 			throw new Exception("用户uuid不可为空");
 		}
 		User orgUser = this.userMapper.selectByPrimaryKey(user.getUuid());
 		if (orgUser == null || "0".equals(orgUser.getFlag()) ) {
 			throw new Exception("该用户不存在");
-		}
-		if (orgUser.getUpdateTime()==user.getUpdateTime()) {
-			throw new Exception("此条消息正在被他人修改，请重新查询后再进行修改");
 		}
 
 		if (!StringUtils.isEmpty(user.getPhone())){
@@ -167,15 +164,22 @@ public class UserService{
 		}
 
 		if (!StringUtils.isEmpty(newPsw)){
-			//修改密码操作
-			if (StringUtils.isEmpty(user.getPassword())){
-				throw new Exception("修改密码不可不传用户旧密码");
-			}
-			if (MD5.verify(user.getPassword(),orgUser.getPassword())){
+			if (type.equals("0")){
+				//管理员
 				String encodNew = MD5.md5(newPsw);
 				user.setPassword(encodNew);
+			}else {
+				//修改密码操作
+				if (StringUtils.isEmpty(user.getPassword())){
+					throw new Exception("修改密码不可不传用户旧密码");
+				}
+				if (MD5.verify(user.getPassword(),orgUser.getPassword())){
+					String encodNew = MD5.md5(newPsw);
+					user.setPassword(encodNew);
+				}
 			}
 		}
+
 		String time = CommonUtil.getNowTimeStamp();
 		int nowTime = Integer.valueOf(time).intValue();
 		user.setUpdateTime(nowTime);

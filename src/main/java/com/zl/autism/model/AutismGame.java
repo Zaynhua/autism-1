@@ -3,6 +3,7 @@ package com.zl.autism.model;
 import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Table(name = "autism_game")
 public class AutismGame {
@@ -34,6 +35,9 @@ public class AutismGame {
 
     @Column(name = "flag")
     private String flag;
+
+    @Transient
+    private User createUser;
 
     public String getUuid() {
         return uuid;
@@ -105,5 +109,13 @@ public class AutismGame {
 
     public void setFlag(String flag) {
         this.flag = flag;
+    }
+
+    public User getCreateUser() {
+        return createUser;
+    }
+
+    public void setCreateUser(User createUser) {
+        this.createUser = createUser;
     }
 }

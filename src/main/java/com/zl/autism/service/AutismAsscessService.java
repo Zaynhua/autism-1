@@ -1,7 +1,9 @@
 package com.zl.autism.service;
 
 import com.zl.autism.mapper.AutismAsscessMapper;
+import com.zl.autism.mapper.UserMapper;
 import com.zl.autism.model.AutismAsscess;
+import com.zl.autism.model.User;
 import com.zl.autism.utils.CommonUtil;
 import com.zl.autism.utils.RandomUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +17,9 @@ public class AutismAsscessService {
 
     @Autowired
     private AutismAsscessMapper autismAsscessMapper;
+
+    @Autowired
+    private UserMapper userMapper;
 
     //增加评估信息
     public String  addAsscess(AutismAsscess autismAsscess) throws Exception{
@@ -81,6 +86,12 @@ public class AutismAsscessService {
 
         ArrayList<AutismAsscess> autismAsscesses = this.autismAsscessMapper.getAsscessList(ids,interventionId,interventionistId);
 
+        for (AutismAsscess asscess:autismAsscesses) {
+            User docter = this.userMapper.selectByPrimaryKey(asscess.getInterventionistId());
+            User patient = this.userMapper.selectByPrimaryKey(asscess.getInterventionId());
+            asscess.setDocter(docter);
+            asscess.setPatient(patient);
+        }
         return autismAsscesses;
     }
 

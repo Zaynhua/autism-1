@@ -3,6 +3,7 @@ package com.zl.autism.model;
 import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 //评估表
 @Table(name = "autism_assess")
@@ -37,6 +38,12 @@ public class AutismAsscess {
 
     @Column(name="flag")
     private String flag;
+
+    @Transient
+    private User docter;
+
+    @Transient
+    private User patient;
 
     public int getCreateTime() {
         return createTime;
@@ -116,5 +123,21 @@ public class AutismAsscess {
 
     public void setBlog(String blog) {
         this.blog = blog;
+    }
+
+    public User getDocter() {
+        return docter;
+    }
+
+    public void setDocter(User docter) {
+        this.docter = docter;
+    }
+
+    public User getPatient() {
+        return patient;
+    }
+
+    public void setPatient(User patient) {
+        this.patient = patient;
     }
 }

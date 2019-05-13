@@ -1,6 +1,10 @@
 package com.zl.autism.service;
 
+import com.zl.autism.mapper.AutismGameMapper;
 import com.zl.autism.mapper.UserAndGameMapper;
+import com.zl.autism.mapper.UserMapper;
+import com.zl.autism.model.AutismGame;
+import com.zl.autism.model.User;
 import com.zl.autism.model.UserAndGame;
 import com.zl.autism.utils.CommonUtil;
 import com.zl.autism.utils.RandomUtils;
@@ -16,6 +20,11 @@ public class UserAndGameService {
     @Autowired
     private UserAndGameMapper userAndGameMapper;
 
+    @Autowired
+    private UserMapper userMapper;
+
+    @Autowired
+    private AutismGameMapper autismGameMapper;
     //增加
     public String addUserRelation(UserAndGame game) throws Exception{
         if (StringUtils.isEmpty(game.getGameId())){
@@ -82,6 +91,12 @@ public class UserAndGameService {
 
     public ArrayList<UserAndGame> getGameRelation(ArrayList<String> list) throws Exception{
         ArrayList<UserAndGame> data = this.userAndGameMapper.getGameRelation(list);
+        for (UserAndGame userAndGame:data) {
+            User user = this.userMapper.selectByPrimaryKey(userAndGame.getUserId());
+            userAndGame.setUser(user);
+            AutismGame game = this.autismGameMapper.selectByPrimaryKey(userAndGame.getGameId());
+            userAndGame.setGame(game);
+        }
         return data;
     }
 }

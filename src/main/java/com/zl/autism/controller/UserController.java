@@ -146,10 +146,11 @@ public class UserController {
     })
     public IDResult updateUser(
             @ApiParam(name="user",value="需要更新的用户信息",required=true)@RequestBody User user,
+            @ApiParam(name = "updateUserType",value = "修改人Type",required = false)@RequestParam(required = false) String updateUserType,
             @ApiParam(name = "newPsw",value = "newPsw",required = false)@RequestParam(required = false) String newPsw) {
         IDResult rs = new IDResult();
         try {
-            String uuid = this.userService.updateUser(user,newPsw);
+            String uuid = this.userService.updateUser(user,updateUserType,newPsw);
             rs.setData(uuid);
             rs.setStatusCode(ResponseMessage.SUCCESS_CODE);
         } catch (Exception e) {
