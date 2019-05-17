@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zl.autism.mapper.AutismCCommentMapper">
+    <resultMap type="com.zl.autism.model.AutismCComment" id="BaseResultMap">
+        <id column="communitys_comment_id" property="communitys_comment_id" jdbcType="VARCHAR"/>
+        <result column="communitys_id" property="communitys_id" jdbcType="VARCHAR"/>
+        <result column="comment_user_id" property="comment_user_id" jdbcType="VARCHAR"/>
+        <result column="communitys_comment" property="communitys_comment" jdbcType="VARCHAR"/>
+        <result column="communitys_comment_time" property="communitys_comment_time" jdbcType="VARCHAR"/>
+        <result column="communitys_comment_name" property="communitys_comment_name" jdbcType="VARCHAR"/>
+
+    </resultMap>
+
+    <select id="getAutismCCommentList" resultMap="BaseResultMap">
+        select * from autism_communitys_comment
+
+        <if test="idList != null and idList.size()&gt;0">
+            where communitys_id in
+            <foreach close=")" collection="idList" index="index" item="listItem" open="(" separator=",">
+                #{listItem}
+            </foreach>
+        </if>
+
+    </select>
+
+</mapper>
